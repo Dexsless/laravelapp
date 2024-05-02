@@ -14,3 +14,9 @@ Route::get('/siswa', function () {
 Route::get('/sekolah', function () {
     return view('sekolah');
 });
+Route::get('/album', function () {
+    return view('album');
+});
+Route::get('/film', function () {
+    return view('film');
+});
