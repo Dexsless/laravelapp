@@ -7,8 +7,8 @@
     <title>Film</title>
     <style>
         body {
-            color: black;
-            background: linear-gradient(rgb(22, 211, 189),rgb(92, 92, 223),white);
+            color: rgb(255, 255, 255);
+            background: linear-gradient(rgb(82, 88, 87),rgb(47, 47, 61),rgb(41, 34, 34));
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
     </style>
@@ -29,18 +29,7 @@
         <li>Judul Film : {{ $item->Judul }}</li>
         <li>Deskripsi Film : {{ $item->Deskripsi }}</li>
     </ul>
-    <h3>Detail Film</h3>
-    <ul>
-        <li>Code Film : {{$item->DetailFilm->codeFilm}}</li>
-        <li>Code Film : {{$item->DetailFilm->urlImdb}}</li>
-    </ul>
-    <h3>Media Film</h3>
-    @foreach ($item->MediaFilm as $value )
-    <ul>
-        <li>Judul Media : {{$value->title}}</li>
-        <li>Tipe Media : {{$value->tipeMedia}}</li>
-    </ul>
-    @endforeach
+    <a href="{{url('film/'. $item->id)}}">Detail Film</a>
 @endforeach
 
 
