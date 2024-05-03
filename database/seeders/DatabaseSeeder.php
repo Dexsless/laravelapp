@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
                     SekolahSeeder::class,
                     AlbumMusikSeeder::class,
                     FilmSeeder::class,
-                    DetailFilmSeeder::class
+                    DetailFilmSeeder::class,
+                    MediaFilmSeeder::class
         ]);
     }
 }
