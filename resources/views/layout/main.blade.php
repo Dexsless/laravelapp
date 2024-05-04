@@ -15,6 +15,7 @@
             </div>
         </section>
 
+        @yield('content')
         <div class="album py-5 bg-light">
             <div class="container">
 
