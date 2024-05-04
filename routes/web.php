@@ -25,3 +25,6 @@ Route::get('/film/{id}', function (int $id) {
     $film = Film::findOrFail($id);
     return view('detailFilm', ['film' => $film]);
 });
+Route::get('/layout', function () {
+    return view('layout/layout');
+    });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -60,4 +60,5 @@
         <li>Code Film : {{$anak->codeFilm}}</li>
         <li>Code Film : {{$anak->urlImdb}}</li>
     </ul>
-@endforeach
+@endforeach --}}
+@extends('layout/layout')
