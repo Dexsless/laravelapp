@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,14 +24,14 @@
 <h1>Judul Film : {{$film->Judul}} </h1>
 <p>Deskripsi : {{$film->Deskripsi}} </p>
 {{-- Start One To One --}}
-<span>
+{{-- <span>
     Detail Film
     <h3>Kode Film : {{$film->DetailFilm->codeFilm}} </h3>
     <h3>URL Imdb : <a href="{{$film->DetailFilm->urlImdb}}">Klik Disini</a> </h3>
-</span>
+</span> --}}
 {{-- end  one to one --}}
 {{-- start one to many --}}
-<h4>Media Film</h4>
+{{-- <h4>Media Film</h4>
 @foreach ($film->MediaFilm as $value )
 <span>
     <p>Judul Media : {{$value->title}} </p>
@@ -41,5 +41,40 @@
     <img src="{{$value->urlMedia}}" width="200px" height="200px">
     @endif
 </span>
-@endforeach
+@endforeach --}}
 {{-- end one to many --}}
+@extends('layout/layout')
+@section('content')
+            <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">{{$film->Judul}}</h1>
+                    <p class="lead text-muted">{{ $film->Deskripsi }}<</p>
+                    <p>
+                        <a href="{{$film->DetailFilm->urlImdb}}" class="btn btn-primary my-2">URL Imdb</a>
+                        <a href="{{ url('/film') }}" class="btn btn-primary my-2">Kemabali ke Home</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+          <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @foreach ($film->MediaFilm as $item)
+            <div class="col">
+                <div class="card shadow-sm">
+                  @if ($item->tipeMedia)
+                    Url Media : <a href="{{ $item->urlMedia }}">Klik Disini</a>
+                    @else
+                        <img src="{{ $item->urlMedia }}" alt="" height="200">
+                    @endif
+                </div>
+              </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
+
+@endsection
