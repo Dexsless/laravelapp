@@ -29,7 +29,7 @@ class MediaFilmSeeder extends Seeder
             'film_id' => 1,
             'tipeMedia' => 1,
             'title' => 'film apa',
-            'urlMedia' => 'https://www.youtube.com/watch?v=a01Jdnn46VI',
+            'urlMedia' => 'https://www.youtube.com/embed/a01Jdnn46VI?si=pe-Wwu3ezQhxkzNa',
         ]);
         MediaFilm::insert([
             'film_id' => 1,
@@ -41,7 +41,7 @@ class MediaFilmSeeder extends Seeder
             'film_id' => 1,
             'tipeMedia' => 1,
             'title' => 'media A',
-            'urlMedia' => 'https://www.youtube.com/watch?v=a01Jdnn46VI',
+            'urlMedia' => 'https://www.youtube.com/embed/52Q0xXS5P6s?si=5HdiUlUW34LuPEfE',
         ]);
         MediaFilm::insert([
             'film_id' => 1,
@@ -53,7 +53,7 @@ class MediaFilmSeeder extends Seeder
             'film_id' => 1,
             'tipeMedia' => 1,
             'title' => 'media C',
-            'urlMedia' => 'https://www.youtube.com/watch?v=a11Jdnn46VI',
+            'urlMedia' => 'https://www.youtube.com/embed/w8xf_q4RMSw?si=R2uU09PhXIpSSKiR',
         ]);
         MediaFilm::insert([
             'film_id' => 2,

@@ -66,7 +66,7 @@
             <div class="col">
                 <div class="card shadow-sm">
                   @if ($item->tipeMedia)
-                    Url Media : <a href="{{ $item->urlMedia }}">Klik Disini</a>
+                    <iframe width="350" height="200"src="{{$item->urlMedia}}"></iframe>
                     @else
                         <img src="{{ $item->urlMedia }}" alt="" height="200">
                     @endif
