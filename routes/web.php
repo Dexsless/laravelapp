@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\IndexController;
 use App\Models\Film;
 use App\Models\Siswa;
 use App\Models\Sekolah;
+use Illuminate\Database\Query\IndexHint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,3 +30,4 @@ Route::get('/film/{id}', function (int $id) {
 Route::get('/layout', function () {
     return view('layout/layout');
     });
+Route::get('/perkenalan', [IndexController::class, 'introduce']);
