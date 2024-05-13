@@ -9,8 +9,12 @@
                 </div>
                 <div class="card-body">
                     <ol>
-                        @foreach ($animal as $item)
+                        @foreach ($hewan as $item)
+                        @if ($item == 'buaya')
+                        <li>{{$item}}- rawrr</li>
+                        @else
                         <li>{{ $item }}</li>
+                        @endif
                         @endforeach
                     </ol>
                 </div>
