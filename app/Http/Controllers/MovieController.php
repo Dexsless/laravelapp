@@ -8,6 +8,16 @@ use App\Http\Requests\UpdateMovieRequest;
 
 class MovieController extends Controller
 {
+    public function getMovie() {
+        $movies = Movie::all();
+        // dd($movie);
+        return view('movie/index', compact('movies'));
+
+    }
+    public function getMovieById($id) {
+        $movie = Movie::findOrFail($id);
+        return view('movie/show', compact('movie'));
+    }
     /**
      * Display a listing of the resource.
      */

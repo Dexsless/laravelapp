@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MovieController;
 use App\Models\Film;
 use App\Models\Siswa;
 use App\Models\Sekolah;
@@ -32,3 +33,5 @@ Route::get('/layout', function () {
     });
 Route::get('/perkenalan', [IndexController::class, 'introduce']);
 Route::get('/hewan', [IndexController::class, 'animals']);
+Route::get('/movie', [MovieController::class, 'getMovie']);
+Route::get('/movie/{id}', [MovieController::class, 'getMovieById']);

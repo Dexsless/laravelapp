@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->text('description');
-            $table->string('coverUrl');
-            $table->string('trailerUrl');
+            $table->text('coverUrl');
+            $table->text('trailerUrl');
             $table->integer('viewer');
             $table->timestamps();
         });
