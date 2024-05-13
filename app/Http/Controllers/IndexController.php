@@ -16,4 +16,10 @@ class IndexController extends Controller
         ];
         return view('latihan/perkenalan', compact('data'));
     }
+    public function animals(){
+        $animal = [
+            'kucing', 'anjing', 'kelinci', 'sapi', 'kambing'
+        ];
+        return view('latihan/animals', compact('animal'));
+    }
 }

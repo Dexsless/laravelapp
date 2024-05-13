@@ -31,3 +31,4 @@ Route::get('/layout', function () {
     return view('layout/layout');
     });
 Route::get('/perkenalan', [IndexController::class, 'introduce']);
+Route::get('/hewan', [IndexController::class, 'animals']);
