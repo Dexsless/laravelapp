@@ -55,9 +55,6 @@
 
     {{-- start main --}}
     <main>
-
-
-
         @yield('content')
     </main>
 
