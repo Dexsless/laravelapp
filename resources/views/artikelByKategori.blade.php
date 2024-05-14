@@ -19,6 +19,7 @@
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
         padding: 10px;
         border: 1px 2px grey;
+        width: 300px;
     }
 
     #card2 {
@@ -30,7 +31,7 @@
 </style>
 @extends('layout.layout')
 @section('content')
-
+<center>
 <div class="container">
     <div class="row">
         @foreach ($artikels as $item)
@@ -51,5 +52,5 @@
         @endforeach
     </div>
 </div>
-
+</center>
 @endsection
