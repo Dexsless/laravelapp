@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MovieController;
 use App\Models\Film;
+use App\Models\Artikel;
 use App\Models\Siswa;
 use App\Models\Sekolah;
 use Illuminate\Database\Query\IndexHint;
@@ -35,3 +37,6 @@ Route::get('/perkenalan', [IndexController::class, 'introduce']);
 Route::get('/hewan', [IndexController::class, 'animals']);
 Route::get('/movie', [MovieController::class, 'getMovie']);
 Route::get('/movie/{id}', [MovieController::class, 'getMovieById']);
+Route::get('/artikel', [ArtikelController::class, 'getArtikel']);
+Route::get('/artikel/id/{id}', [ArtikelController::class, 'getArtikelById']);
+Route::get('/artikel/kategori/{kategori}', [ArtikelController::class, 'getArtikelByKategori']);
