@@ -8,12 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Buku extends Model
 {
     use HasFactory;
+    //Kolom(field) mana saja yang boleh di isi
+    public $fillable = ['judul', 'isbn', 'deskripsi', 'jml_halaman', 'cover', 'tgl_terbit', 'id_penulis'];
 
-    public function Penulis()
+    //Kolom(field) mana saja yang boleh di perlihatkan
+    public $visible = ['judul', 'isbn', 'deskripsi', 'jml_halaman', 'cover', 'tgl_terbit', 'id_penulis'];
+
+    public function penulis()
     {
-        return $this->belongsTo(Penulis::class);
+        return $this->belongsTo(Penulis::class, 'id_penulis');
     }
-    public function Genre() {
-        return $this->belongsTo(Genre::class);
+
+    //relasi many to many genre & buku
+    public function genre()
+    {
+        //model genre memiliki banyak data dari model buku melalui table (pivot) genre_buku
+        //yang diwakili oleh id_genre & id_buku
+        return $this->belongsToMany(Genre::class, 'genre_buku', 'id_buku', 'id_genre');
+    }
+    public function deleteImage()
+    {
+        if ($this->cover && file_exists(public_path('images/buku/' . $this->cover))) {
+            return unlink(public_path('images/buku/' . $this->cover));
+        }
     }
 }

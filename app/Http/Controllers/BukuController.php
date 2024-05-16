@@ -3,28 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
-use Illuminate\Http\Request;
 use App\Models\Genre;
 use App\Models\Penulis;
+use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    /**
-     * Display a listing of the resource.
-     */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
         $buku = Buku::orderBy('id', 'desc')->get();
         return view('buku.index', compact('buku'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $penulis = Penulis::all();
@@ -32,106 +27,98 @@ class BukuController extends Controller
         return view('buku.create', compact('penulis', 'genre'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'judul' => 'required|unique:bukus|max:255',
-            'jumlah_halaman' => 'required|unique:bukus',
-            'cover' => 'required',
+            'judul' => 'required|unique:bukus',
             'isbn' => 'required',
-            'dekripsi' => 'required',
-            'tanggal_terbit' => 'required',
-            'penulis_id' => 'required',
+            'jml_halaman' => 'required|numeric',
+            'cover' => 'required|max:4000|mimes:png,jpg',
+            'deskripsi' => 'required',
+            'id_penulis' => 'required',
+            'tgl_terbit' => 'required',
         ]);
 
         $buku = new Buku();
-        $buku->judul = $request->get('judul');
-        $buku->jumlah_halaman = $request->get('jumlah_halaman');
-        $buku->isbn = $request->get('isbn');
-        $buku->dekripsi = $request->get('dekripsi');
-        $buku->tanggal_terbit = $request->get('tanggal_terbit');
-        $buku->penulis_id = $request->get('penulis_id');
+        $buku->judul = $request->judul;
+        $buku->isbn = $request->isbn;
+        $buku->jml_halaman = $request->jml_halaman;
+        $buku->deskripsi = $request->deskripsi;
+        $buku->id_penulis = $request->id_penulis;
+        $buku->tgl_terbit = $request->tgl_terbit;
+
+        //upload foto
         if ($request->hasFile('cover')) {
-            $cover = $request->file('cover');
-            $name = rand(1000, 9999) . $cover->getClientOriginalName();
-            $cover->move('images/buku', $name);
+            $img = $request->file('cover');
+            $name = rand(1000, 9999) . $img->getClientOriginalName();
+            $img->move('images/buku/', $name);
             $buku->cover = $name;
         }
-        $buku->save();
 
-        $buku->genre()->attach($request->get('genre'));
+        $buku->save();
+        //tampilkan banyak genre di buku
+        $buku->genre()->attach($request->genre);
         return redirect()->route('buku.index')
             ->with('success', 'data berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $buku = Buku::findOrFail($id);
         return view('buku.show', compact('buku'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $buku = Buku::findOrFail($id);
-        $penulis = Penulis::all();
         $genre = Genre::all();
-        $selectGenre = Genre::with('buku')->pluck('id')->toArray();
-        return view('buku.edit', compact('buku', 'penulis', 'genre', 'selectGenre'));
+        $penulis = Penulis::all();
+        $selectGenre = $buku->genre->pluck('id')->toArray();
+        return view('buku.edit', compact('buku', 'genre', 'penulis', 'selectGenre'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Buku $buku)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'judul' => 'required|unique:bukus|max:255',
-            'jumlah_halaman' => 'required|unique:bukus',
+            'judul' => 'required|unique:bukus',
             'isbn' => 'required',
-            'dekripsi' => 'required',
-            'tanggal_terbit' => 'required',
-            'penulis_id' => 'required',
+            'jml_halaman' => 'required|numeric',
+            // 'cover' => 'required|max:2048kbmimes:png.jpg',
+            'deskripsi' => 'required',
+            'id_penulis' => 'required',
+            'tgl_terbit' => 'required',
         ]);
 
         $buku = new Buku();
-        $buku->judul = $request->get('judul');
-        $buku->jumlah_halaman = $request->get('jumlah_halaman');
-        $buku->isbn = $request->get('isbn');
-        $buku->dekripsi = $request->get('dekripsi');
-        $buku->tanggal_terbit = $request->get('tanggal_terbit');
-        $buku->penulis_id = $request->get('penulis_id');
+        $buku->judul = $request->judul;
+        $buku->isbn = $request->isbn;
+        $buku->jml_halaman = $request->jml_halaman;
+        $buku->deskripsi = $request->deskripsi;
+        $buku->id_penulis = $request->id_penulis;
+
+        //upload foto
         if ($request->hasFile('cover')) {
-            $buku->deleteImage();
-            $cover = $request->file('cover');
-            $name = rand(1000, 9999) . $cover->getClientOriginalName();
-            $cover->move('images/buku', $name);
+            $buku = deleteImage(); //untuk menghapus gambar sebelum mengganti gambar baru
+            $img = $request->file('cover');
+            $name = rand(1000, 9999) . $img->getClientOriginalName();
+            $img->move('images/buku/', $name);
             $buku->cover = $name;
         }
-        $buku->save();
 
-        $buku->genre()->sync($request->get('genre'));
+        $buku->save();
+        //tampilkan banyak genre di buku
+        $buku->genre()->sync($request->genre);
         return redirect()->route('buku.index')
             ->with('success', 'data berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $buku = Buku::findOrFail($id);
         $buku->deleteImage();
         $buku->delete();
-        $buku->genre()->dettach();
+        $buku->genre()->detach();
+
         return redirect()->route('buku.index')
             ->with('success', 'data berhasil dihapus');
     }

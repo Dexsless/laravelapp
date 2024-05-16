@@ -8,27 +8,40 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('bukus', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
+            $table->string('judul')->unique();
             $table->string('isbn');
+            $table->text('deskripsi');
             $table->integer('jml_halaman');
-            $table->string('tgl_terbit');
             $table->string('cover');
-            $table->foreignId('penulis_id')->constrained()->onDelete('cascade');
-            $table->longText('deksripsi');
+            $table->date('tgl_terbit');
+            $table->foreignId('id_penulis')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        //membuat tabel pivot (table bantu)
+        Schema::create('genre_buku', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_buku')->onDelete('cascade');
+            $table->foreignId('id_genre')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('bukus');
+        Schema::dropIfExists('genre_buku');
     }
 };
