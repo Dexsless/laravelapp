@@ -101,28 +101,37 @@
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="home" class="nav-link px-2 text-secondary">Home</a></li>
-                        <li><a href="buku.index" class="nav-link px-2 text-white">Buku</a></li>
-                        <li><a href="penulis.index" class="nav-link px-2 text-white">Penulis</a></li>
-                        <li><a href="genre.index" class="nav-link px-2 text-white">Genre</a></li>
+                        <li><a href="https://getbootstrap.com#" class="nav-link px-2 text-secondary">Home</a></li>
+                        <li><a href="https://getbootstrap.com#" class="nav-link px-2 text-white">Features</a></li>
+                        <li><a href="https://getbootstrap.com#" class="nav-link px-2 text-white">Pricing</a></li>
+                        <li><a href="https://getbootstrap.com#" class="nav-link px-2 text-white">FAQs</a></li>
+                        <li><a href="https://getbootstrap.com#" class="nav-link px-2 text-white">About</a></li>
                     </ul>
 
                     <div class="text-end">
                         @guest
                         <h4>Login / Register</h4>
-                        <a href="{{ url('login') }}" class="text-white">Login</a>
-                        <a href="{{ url('register') }}" class="text-white">Register</a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ url('login') }}" class="text-white">Login</a></li>
+                            <li><a href="{{ url('register') }}" class="text-white">Register</a></li>
+                        </ul>
                         @else
-                        <h style="color: white;">{{ Auth::user()->name }}</h5>
-                            <a href="{{ url('logout') }}" class="text-white"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+                        <ul class="list-unstyled">
+                            <li>
+                                <h5 style="color: white;">{{ Auth::user()->name }}</h5>
+                            </li>
+                            <li>
+                                <a href="{{ url('logout') }}" class="text-white"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                            </li>
                             {{-- form untuk logout --}}
                             <form action="{{ route('logout') }}" method="post" id="logout-form">
                                 @csrf
                             </form>
-                            @endguest
+                        </ul>
+                        @endguest
                     </div>
                 </div>
             </div>
