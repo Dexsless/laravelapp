@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PenulisController;
 use App\Models\Film;
 use App\Models\Artikel;
 use App\Models\Siswa;
@@ -35,8 +36,15 @@ Route::get('/layout', function () {
     });
 Route::get('/perkenalan', [IndexController::class, 'introduce']);
 Route::get('/hewan', [IndexController::class, 'animals']);
-Route::get('/movie', [MovieController::class, 'getMovie']);
+Route::get('/movie', [MovieController::class, 'getMovie'])->middleware('auth');
 Route::get('/movie/{id}', [MovieController::class, 'getMovieById']);
 Route::get('/artikel', [ArtikelController::class, 'getArtikel']);
 Route::get('/artikel/id/{id}', [ArtikelController::class, 'getArtikelById']);
 Route::get('/artikel/kategori/{kategori}', [ArtikelController::class, 'getArtikelByKategori']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// route crud
+Route::resource('penulis', PenulisController::class);
