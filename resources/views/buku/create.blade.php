@@ -62,7 +62,7 @@
                             </div>
                             <div class="mb-2">
                                 <label for="">Penulis</label>
-                                <select name="id_penulis" class="form-control @error('id_penulis') is-invalid @enderror">
+                                <select name="id_penulis" class="form-control select @error('id_penulis') is-invalid @enderror">
                                     <option value="">Pilih Penulis</option>
                                     @foreach ($penulis as $data)
                                         <option value="{{$data->id}}">{{$data->nama_penulis}}</option>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="mb-2">
                                 <label for="">Genre</label>
-                                <select name="genre[]" class="form-select" multiple>
+                                <select name="genre[]" class="form-select select-multiple" multiple>
                                     @foreach ($genre as $data)
                                         <option value="{{$data->id}}">{{$data->nama_genre}}</option>
                                     @endforeach

@@ -14,15 +14,18 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul buku</th>
-                                    <th>Penulis</th>
-                                    <th>Cover</th>
-                                    <th>Aksi</th>
-                                </tr>
+                            <table class="table" id="table-baru">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Judul buku</th>
+                                        <th>Penulis</th>
+                                        <th>Cover</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
                                 @php $no = 1; @endphp
+                                <tbody>
                                 @foreach ($buku as $item)
                                     <tr>
                                         <td>{{ $no++ }}</td>
@@ -43,12 +46,13 @@
                                                 </a>
 
                                                 <button class="btn btn-sm btn-danger" type="submit"
-                                                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                    Delete</button>
+                                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                Delete</button>
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
